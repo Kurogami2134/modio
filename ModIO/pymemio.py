@@ -68,4 +68,4 @@ class PymemIO(IOBase):
     def write(self, data):
         res = self.pm.write_bytes(self.base_address + self.offset, data, len(data))
         self.seek(len(data), os.SEEK_CUR)
-        return res
+        return len(data)
