@@ -10,7 +10,11 @@ from ModIO.pymemio import PymemIO
 class PspRamIO(PymemIO):
     def __init__(self):
         super().__init__(None)
-        pywi = pyautogui.getWindowsWithTitle("PPSSPP")[0]
+        pywi = pyautogui.getWindowsWithTitle("PPSSPP")
+        if len(pywi):
+            pywi = pywi[0]
+        else:
+            raise ProcessNotFound("PPSSPP")
         wi = win32gui.FindWindow(None, pywi.title)
         retl = win32api.SendMessage(wi, 0x8000+0x3118, 0, 0)
         reth = win32api.SendMessage(wi, 0x8000+0x3118, 0, 1) << 32
