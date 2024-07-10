@@ -8,6 +8,7 @@ from ModIO.pymemio import PymemIO
 class PsxRamIO(PymemIO):
     def __init__(self, base_address):
         super().__init__(None, base_address=base_address)
+        self._inject()
 
     def _inject(self, process_name=None):
         injected = False
