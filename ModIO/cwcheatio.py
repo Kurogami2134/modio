@@ -69,7 +69,7 @@ class CwCheatIO:
     def write_once(self, data: bytes) -> None:
         if self.virtual_address < 0x8800000:
             raise PermissionDenied
-        self.file.write(f'_L 0xE{hex(int(len(data)//4)).replace("0x", ""):0>3}0000 0x0{hex(self.virtual_address-0x8800000).replace("0x", ""):0>7}\n')
+        self.file.write(f'_L 0xE{hex(int(len(data)//4)).replace("0x", ""):0>3}{hex(data[1] << 8 | data[0]).replace("0x", ""):0>4} 0x1{hex(self.virtual_address-0x8800000).replace("0x", ""):0>7}\n')
         while len(data)//4 > 0:
             word = data[:4]
             data = data[4:]
